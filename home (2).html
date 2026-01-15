@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditrip Care - मेडिट्रिप केयर</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png" class="favicon-logo" style="border-radius: 50%;"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-container">
+            <div class="meditrip-logo">
+                <div class="logo-circle">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h1 class="logo-text">Meditrip Care</h1>
+                <p class="logo-subtext">मेडिट्रिप केयर</p>
+            </div>
+            
+            <div class="loader-wrapper">
+                <div class="loader">
+                    <div class="loader-bar"></div>
+                    <div class="loader-bar"></div>
+                    <div class="loader-bar"></div>
+                    <div class="loader-bar"></div>
+                </div>
+                <div class="loading-text">Loading your healthcare journey...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointment Loading Modal -->
+    <div class="appointment-loading-modal" id="appointmentLoadingModal">
+        <div class="circular-loader-container">
+            <div class="circular-loader">
+                <svg class="circular-loader-svg" viewBox="0 0 50 50">
+                    <circle class="loader-path" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+                </svg>
+                <div class="loader-checkmark">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+            <h3 class="loading-title">Processing Appointment</h3>
+            <p class="loading-message" id="loadingMessage">Scheduling your appointment...</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Top Language Bar - Like the image -->
+        <div class="top-language-bar">
+            <div class="container">
+                <div class="language-container">
+                    <div class="language-header">
+                        <i class="fas fa-globe language-icon"></i>
+                        <span class="language-label">Select Language</span>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <div class="current-language-display" id="languageToggleBtn">
+                            <span class="language-flag">🇺🇸</span>
+                            <span class="language-name-display" id="currentLanguage">English</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                        
+                        <!-- Language Dropdown with Search -->
+                        <div class="language-dropdown" id="languageDropdown">
+                            <div class="language-search-container">
+                                <div class="search-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <input 
+                                    type="text" 
+                                    id="languageSearchInput" 
+                                    placeholder="Search language..." 
+                                    class="language-search-input"
+                                >
+                                <button class="clear-search-btn" id="clearLanguageSearch" title="Clear search">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="language-list-container">
+                                <div class="language-list" id="languageList">
+                                    <!-- Popular Languages -->
+                                    <div class="language-group">
+                                        <div class="language-group-title">Popular Languages</div>
+                                        <div class="language-items">
+                                            <div class="language-item selected" data-value="en">
+                                                <span class="language-flag">🇺🇸</span>
+                                                <span class="language-item-name">English</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="hi">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">हिन्दी (Hindi)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="es">
+                                                <span class="language-flag">🇪🇸</span>
+                                                <span class="language-item-name">Español (Spanish)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="fr">
+                                                <span class="language-flag">🇫🇷</span>
+                                                <span class="language-item-name">Français (French)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ar">
+                                                <span class="language-flag">🇸🇦</span>
+                                                <span class="language-item-name">العربية (Arabic)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="zh">
+                                                <span class="language-flag">🇨🇳</span>
+                                                <span class="language-item-name">中文 (Chinese)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- All Languages -->
+                                    <div class="language-group">
+                                        <div class="language-group-title">All Languages</div>
+                                        <div class="language-items">
+                                            <div class="language-item" data-value="af">
+                                                <span class="language-flag">🇿🇦</span>
+                                                <span class="language-item-name">Afrikaans</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="sq">
+                                                <span class="language-flag">🇦🇱</span>
+                                                <span class="language-item-name">Shqip (Albanian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="am">
+                                                <span class="language-flag">🇪🇹</span>
+                                                <span class="language-item-name">አማርኛ (Amharic)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="hy">
+                                                <span class="language-flag">🇦🇲</span>
+                                                <span class="language-item-name">Հայերեն (Armenian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="az">
+                                                <span class="language-flag">🇦🇿</span>
+                                                <span class="language-item-name">Azərbaycan (Azerbaijani)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="bn">
+                                                <span class="language-flag">🇧🇩</span>
+                                                <span class="language-item-name">বাংলা (Bengali)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="bs">
+                                                <span class="language-flag">🇧🇦</span>
+                                                <span class="language-item-name">Bosanski (Bosnian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="bg">
+                                                <span class="language-flag">🇧🇬</span>
+                                                <span class="language-item-name">Български (Bulgarian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="my">
+                                                <span class="language-flag">🇲🇲</span>
+                                                <span class="language-item-name">မြန်မာ (Burmese)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ca">
+                                                <span class="language-flag">🇪🇸</span>
+                                                <span class="language-item-name">Català (Catalan)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="hr">
+                                                <span class="language-flag">🇭🇷</span>
+                                                <span class="language-item-name">Hrvatski (Croatian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="cs">
+                                                <span class="language-flag">🇨🇿</span>
+                                                <span class="language-item-name">Čeština (Czech)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="da">
+                                                <span class="language-flag">🇩🇰</span>
+                                                <span class="language-item-name">Dansk (Danish)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="nl">
+                                                <span class="language-flag">🇳🇱</span>
+                                                <span class="language-item-name">Nederlands (Dutch)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="et">
+                                                <span class="language-flag">🇪🇪</span>
+                                                <span class="language-item-name">Eesti (Estonian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="fi">
+                                                <span class="language-flag">🇫🇮</span>
+                                                <span class="language-item-name">Suomi (Finnish)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="de">
+                                                <span class="language-flag">🇩🇪</span>
+                                                <span class="language-item-name">Deutsch (German)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="el">
+                                                <span class="language-flag">🇬🇷</span>
+                                                <span class="language-item-name">Ελληνικά (Greek)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="gu">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">ગુજરાતી (Gujarati)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="he">
+                                                <span class="language-flag">🇮🇱</span>
+                                                <span class="language-item-name">עברית (Hebrew)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="hu">
+                                                <span class="language-flag">🇭🇺</span>
+                                                <span class="language-item-name">Magyar (Hungarian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="is">
+                                                <span class="language-flag">🇮🇸</span>
+                                                <span class="language-item-name">Íslenska (Icelandic)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="id">
+                                                <span class="language-flag">🇮🇩</span>
+                                                <span class="language-item-name">Bahasa Indonesia</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ga">
+                                                <span class="language-flag">🇮🇪</span>
+                                                <span class="language-item-name">Gaeilge (Irish)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="it">
+                                                <span class="language-flag">🇮🇹</span>
+                                                <span class="language-item-name">Italiano (Italian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ja">
+                                                <span class="language-flag">🇯🇵</span>
+                                                <span class="language-item-name">日本語 (Japanese)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="kn">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">ಕನ್ನಡ (Kannada)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="kk">
+                                                <span class="language-flag">🇰🇿</span>
+                                                <span class="language-item-name">Қазақ (Kazakh)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ko">
+                                                <span class="language-flag">🇰🇷</span>
+                                                <span class="language-item-name">한국어 (Korean)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="lv">
+                                                <span class="language-flag">🇱🇻</span>
+                                                <span class="language-item-name">Latviešu (Latvian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="lt">
+                                                <span class="language-flag">🇱🇹</span>
+                                                <span class="language-item-name">Lietuvių (Lithuanian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="mk">
+                                                <span class="language-flag">🇲🇰</span>
+                                                <span class="language-item-name">Македонски (Macedonian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ms">
+                                                <span class="language-flag">🇲🇾</span>
+                                                <span class="language-item-name">Bahasa Melayu (Malay)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ml">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">മലയാളം (Malayalam)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="mr">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">मराठी (Marathi)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ne">
+                                                <span class="language-flag">🇳🇵</span>
+                                                <span class="language-item-name">नेपाली (Nepali)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="no">
+                                                <span class="language-flag">🇳🇴</span>
+                                                <span class="language-item-name">Norsk (Norwegian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="fa">
+                                                <span class="language-flag">🇮🇷</span>
+                                                <span class="language-item-name">فارسی (Persian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="pl">
+                                                <span class="language-flag">🇵🇱</span>
+                                                <span class="language-item-name">Polski (Polish)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="pt">
+                                                <span class="language-flag">🇵🇹</span>
+                                                <span class="language-item-name">Português (Portuguese)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="pa">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">ਪੰਜਾਬੀ (Punjabi)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ro">
+                                                <span class="language-flag">🇷🇴</span>
+                                                <span class="language-item-name">Română (Romanian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ru">
+                                                <span class="language-flag">🇷🇺</span>
+                                                <span class="language-item-name">Русский (Russian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="sr">
+                                                <span class="language-flag">🇷🇸</span>
+                                                <span class="language-item-name">Српски (Serbian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="sk">
+                                                <span class="language-flag">🇸🇰</span>
+                                                <span class="language-item-name">Slovenčina (Slovak)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="sl">
+                                                <span class="language-flag">🇸🇮</span>
+                                                <span class="language-item-name">Slovenščina (Slovenian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="so">
+                                                <span class="language-flag">🇸🇴</span>
+                                                <span class="language-item-name">Soomaali (Somali)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="sv">
+                                                <span class="language-flag">🇸🇪</span>
+                                                <span class="language-item-name">Svenska (Swedish)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="tl">
+                                                <span class="language-flag">🇵🇭</span>
+                                                <span class="language-item-name">Tagalog (Filipino)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ta">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">தமிழ் (Tamil)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="te">
+                                                <span class="language-flag">🇮🇳</span>
+                                                <span class="language-item-name">తెలుగు (Telugu)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="th">
+                                                <span class="language-flag">🇹🇭</span>
+                                                <span class="language-item-name">ไทย (Thai)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="tr">
+                                                <span class="language-flag">🇹🇷</span>
+                                                <span class="language-item-name">Türkçe (Turkish)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="uk">
+                                                <span class="language-flag">🇺🇦</span>
+                                                <span class="language-item-name">Українська (Ukrainian)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="ur">
+                                                <span class="language-flag">🇵🇰</span>
+                                                <span class="language-item-name">اردو (Urdu)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="uz">
+                                                <span class="language-flag">🇺🇿</span>
+                                                <span class="language-item-name">O'zbek (Uzbek)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="vi">
+                                                <span class="language-flag">🇻🇳</span>
+                                                <span class="language-item-name">Tiếng Việt (Vietnamese)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="cy">
+                                                <span class="language-flag">🏴󠁧󠁢󠁷󠁬󠁳󠁿</span>
+                                                <span class="language-item-name">Cymraeg (Welsh)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                            <div class="language-item" data-value="zu">
+                                                <span class="language-flag">🇿🇦</span>
+                                                <span class="language-item-name">isiZulu (Zulu)</span>
+                                                <i class="fas fa-check check-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="no-results" id="noResults">
+                                    <i class="fas fa-search"></i>
+                                    <p>No languages found</p>
+                                    <small>Try different keywords</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="container">
+                <!-- Logo and Tagline -->
+                <div class="logo-section">
+                    <img src="{% static 'images/logo.png' %}" alt="Indiamedtrip.com" class="logo">
+                    <p class="tagline">From Inquiry to Recovery</p>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="main-nav">
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-link active">Home</a></li>
+                        <li class="dropdown" id="aboutDropdown">
+                            <a href="#" class="nav-link">
+                                About <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" class="dropdown-link">About Us</a></li>
+                                <li><a href="#" class="dropdown-link">Testimonials</a></li>
+                                <li class="dropdown-submenu">
+                                    <a href="#" class="dropdown-link has-submenu">
+                                        Services <i class="fas fa-chevron-right submenu-icon"></i>
+                                    </a>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a href="#" class="dropdown-link">Specialties</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="nav-link">Hospitals</a></li>
+                        <li><a href="#" class="nav-link">Contact Us</a></li>
+                        <li><a href="#" class="nav-link">F&Q</a></li>
+                    </ul>
+                    
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </nav>
+
+                <!-- Search and Appointment Section -->
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search doctors or hospitals">
+                    </div>
+                    <button class="appointment-btn" id="headerAppointmentBtn">
+                        <i class="fas fa-calendar-check"></i>
+                        Get Appointment
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <div class="container">
+                <h1>Welcome to Meditrip Care</h1>
+                <p>Your trusted partner for medical tourism in India.</p>
+                
+                <!-- Appointment Section -->
+                <section class="appointment-section">
+                    <div class="appointment-container">
+                        <div class="appointment-header">
+                            <h2>Make an Appointment</h2>
+                            <p class="appointment-subtitle">Select your preferred date and time</p>
+                        </div>
+                        
+                        <form class="appointment-form" id="appointmentForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="patientName">Patient Name</label>
+                                    <input type="text" id="patientName" placeholder="Enter patient name" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phoneNumber">Phone Number</label>
+                                    <input type="tel" id="phoneNumber" placeholder="Enter phone number" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="appointmentDate">Select Date</label>
+                                    <div class="date-input-wrapper">
+                                        <input type="text" id="appointmentDate" placeholder="Click to select date" readonly>
+                                        <i class="fas fa-calendar-alt calendar-icon"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="appointmentTime">Select Time Slot</label>
+                                    <div class="time-input-wrapper">
+                                        <input type="text" id="appointmentTime" placeholder="Click to select time" readonly>
+                                        <i class="fas fa-clock clock-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="department">Select Department</label>
+                                    <div class="select-wrapper">
+                                        <select id="department" required>
+                                            <option value="">Choose department</option>
+                                            <option value="cardiology">Cardiology</option>
+                                            <option value="neurology">Neurology</option>
+                                            <option value="orthopedics">Orthopedics</option>
+                                            <option value="pediatrics">Pediatrics</option>
+                                            <option value="oncology">Oncology</option>
+                                            <option value="dermatology">Dermatology</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="hospital">Search Hospital</label>
+                                    <div class="search-wrapper">
+                                        <input type="text" id="hospital" placeholder="Search hospital" required>
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="appointment-submit-btn" id="submitAppointmentBtn">
+                                <i class="fas fa-calendar-check"></i>
+                                Book Appointment
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Calendar Modal -->
+                    <div class="calendar-modal" id="calendarModal">
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button class="calendar-nav-btn prev-month" id="prevMonth">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h3 class="calendar-month-year" id="currentMonthYear"></h3>
+                                <button class="calendar-nav-btn next-month" id="nextMonth">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="calendar-weekdays">
+                                <div>Sun</div>
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                            </div>
+                            
+                            <div class="calendar-days" id="calendarDays"></div>
+                            
+                            <div class="calendar-footer">
+                                <button class="calendar-today-btn" id="todayBtn">Today</button>
+                                <div class="calendar-actions">
+                                    <button class="calendar-cancel-btn" id="cancelCalendar">Cancel</button>
+                                    <button class="calendar-ok-btn" id="selectDateBtn">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Time Slot Modal -->
+                    <div class="timeslot-modal" id="timeslotModal">
+                        <div class="timeslot-container">
+                            <div class="timeslot-header">
+                                <h3>Select Time Slot</h3>
+                                <button class="timeslot-close-btn" id="closeTimeslot">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="timeslot-grid" id="timeslotGrid">
+                                <!-- Time slots will be populated by JavaScript -->
+                            </div>
+                            
+                            <div class="timeslot-footer">
+                                <button class="timeslot-custom-btn" id="customTimeBtn">
+                                    <i class="fas fa-clock"></i>
+                                    Custom Time
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Time Modal -->
+                    <div class="custom-time-modal" id="customTimeModal">
+                        <div class="custom-time-container">
+                            <div class="custom-time-header">
+                                <h3>Enter Custom Time</h3>
+                                <button class="custom-time-close" id="closeCustomTime">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="custom-time-inputs">
+                                <div class="custom-time-group">
+                                    <label for="customHour">Hour (HH)</label>
+                                    <input type="number" id="customHour" min="0" max="23" placeholder="00">
+                                </div>
+                                <div class="custom-time-separator">:</div>
+                                <div class="custom-time-group">
+                                    <label for="customMinute">Minute (MM)</label>
+                                    <input type="number" id="customMinute" min="0" max="59" placeholder="00">
+                                </div>
+                                <div class="custom-time-group">
+                                    <label for="customPeriod">AM/PM</label>
+                                    <select id="customPeriod">
+                                        <option value="AM">AM</option>
+                                        <option value="PM">PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="custom-time-footer">
+                                <button class="custom-time-cancel" id="cancelCustomTime">Cancel</button>
+                                <button class="custom-time-ok" id="saveCustomTime">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Scroll to Top Button -->
+                <button class="scroll-to-top" id="scrollToTopBtn">
+                    <i class="fas fa-chevron-up"></i>
+                    <span>Back to Top</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>
